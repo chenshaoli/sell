@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');//POST方法下引入；
 
-var urlencodedParser = bodyParser.urlencoded({extend:false});//POST方法下引入；
+var urlencodedParser = bodyParser.urlencoded({extended:false});//POST方法下引入；
 
 app.use(express.static('resource'));
 
@@ -21,11 +21,11 @@ app.get('/express_index.html',function(req,res){
 
 // })
 
-app.post('/process_get',function(req,res) { //POST方法
+app.post('/process_post',urlencodedParser,function(req,res) { //POST方法
 	//输出JSON 格式
 	var response = {
-		'first_name':req.query.first_name,
-		'last_name':req.query.last_name
+		'first_name':req.body.first_name,
+		'last_name':req.body.last_name
 	};
 	console.log(response);
 	res.end(JSON.stringify(response));
